@@ -1,0 +1,17 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:13-alpine
+    container_name: student-postgres
+    expose:
+      - '5432'
+    ports:
+      - '54321:5432'
+    environment:
+      - PG_PASSWORD=password
+      - POSTGRES_PASSWORD=password
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres']
+      interval: 10s
+      timeout: 5s
+      retries: 5
